@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 
 <title>Cisco device configurator</title>
 
@@ -13,7 +16,7 @@
 		 
  <style>
  html {
-    height: auto;
+    height: 25%;
 }
 body {
 
@@ -91,9 +94,6 @@ body {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<br>
-
-
 
   
   <div class="container">
@@ -101,43 +101,33 @@ body {
 	  		<h1>Device configurator</h1>
 	  		<p>Welcome page</p> 
   		</div>
+  		<br>
   
   		<div class="row align-items-end">
-			<div class="col-md-6">
+			<div class="col-md-4" align="left">
+				<form action="configuration" method="post">
   				<div class="form-group">
 				    <label for="inputsm">Name:</label>
-				    <input class="form-control input-sm" id="name" type="text">
+				    <input class="form-control input-sm" id="name" name="name" type="text">
+				    <button type="submit" class="btn btn-default" value="Submit">Submit</button>
 				</div>
-  			
-  			
-  			
+				</form>
   			</div>
-  			<div class="col-md-6">
+  			<div class="col-md-4" align="center">
+  			<img alt="Poker" src="poker.jpg" height="100%" width="100%">
+  			</div>
+  			<div class="col-md-4">
 	  			<ul class="nav nav-tabs">
-				  <li role="presentation" class="active"><a href="#">Serial</a></li>
-				  <li role="presentation"><a href="#">SSH</a></li>
-				  <li role="presentation"><a href="#">Telnet</a></li>
-				  <li role="presentation"><a href="#">Raw-text</a></li>
+				  <li role="presentation" id="serialBTN" class="active" onclick="connectionMenu(1)"><a href="#">Serial</a></li>
+				  <li role="presentation" id="sshBTN" class="" onclick="connectionMenu(2)"><a href="#">SSH</a></li>
+				  <li role="presentation" id="telnetBTN" class="" onclick="connectionMenu(3)"><a href="#">Telnet</a></li>
+				  <li role="presentation" id="rawBTN" class="" onclick="connectionMenu(4)"><a href="#">Raw-text</a></li>
 				</ul>
-				<iframe src="/configuration" frameborder="0"></iframe>
+				<iframe id="frame" src="/configuration/serial" frameborder="0" width="100%" height="auto"></iframe>
   			</div>
   		</div>
+  		
   </div>
-  
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-
-
-<h1>${a.print()}</h1>
-<a href="/configuration"> ${a.print()}</a>
-
-<form action="/" method="post">
-<input type="text" class="form-control" id="langIndex" name="langIndex">
-<button type="submit" class="btn btn-default" value="Submit">Submit</button>
-</form>
-</div>
 
 
 
@@ -147,7 +137,7 @@ body {
   
   	<div class="container">
   		<div class="row align-items-end">
-			<div class="col-md-6">
+			<div class="col-md-6" align="left">
 	  			<div class="dropup">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    idź
@@ -170,6 +160,37 @@ body {
   		</div>
   </div>
 </nav>
+
+
+
+<script>
+function connectionMenu(x) {
+	
+	document.getElementById("serialBTN").classList.remove('active');
+	document.getElementById("sshBTN").classList.remove('active');
+	document.getElementById("telnetBTN").classList.remove('active');
+	document.getElementById("rawBTN").classList.remove('active');
+	
+	if(x==1){
+    document.getElementById("frame").src = "/configuration/serial";
+    document.getElementById("serialBTN").classList.add('active');
+    
+	}
+	else if(x==2){
+		document.getElementById("frame").src = "/configuration/ssh";
+		document.getElementById("sshBTN").classList.add('active');
+		}
+	else if(x==3){
+		document.getElementById("frame").src = "/configuration/telnet";
+		document.getElementById("telnetBTN").classList.add('active');
+		}
+	else if(x==4){
+		document.getElementById("frame").src = "/configuration/raw";
+		document.getElementById("rawBTN").classList.add('active');
+		}
+    
+}
+</script>
 
 
 		<!-- jQuery library -->

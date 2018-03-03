@@ -9,11 +9,6 @@
 <body>
 
 
-
-<%@include file="INconfiguration/serial.jsp" %>
-
-
-
 <form action="configuration" method="post">
 <div class="modal-dialog">
 
