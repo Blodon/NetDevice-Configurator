@@ -29,11 +29,12 @@ public class ConfigurationController {
 		return model;
 	}
 
-	@PostMapping("/configuration")
-	public ModelAndView setConfig(@RequestParam String name) {
+	@PostMapping(value = "/configuration")
+	public ModelAndView setConfig(@RequestParam String name, @RequestParam String password) {
 		
 		ConfigurationDTO c = new ConfigurationDTO();
 		c.setName(name);
+		c.setPassword(password);
 		
 		AccessService.saveConfigurationData(c);
 		
@@ -74,13 +75,14 @@ public class ConfigurationController {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/raw");
 		
-		String config;
-		ConfigGenerator a = new ConfigGenerator();
+		//String config ="";
+		ConfigGenerator configGenerator = new ConfigGenerator();
 		
-		config = a.print(AccessService.getAllConfigurationData().get(0));
+		//config = configGenerator.print(AccessService.getAllConfigurationData().get(0));
 		
-		model.addObject("config", config);
-	
+		model.addObject("config", configGenerator.print(AccessService.getAllConfigurationData().get(0)));
+		model.addObject("configLines", configGenerator.linesCount());
+		
 		return model;
 	}
 	

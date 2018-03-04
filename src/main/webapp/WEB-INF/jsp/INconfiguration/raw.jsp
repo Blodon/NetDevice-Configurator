@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<textarea rows="${configLines}" cols="100%">
 ${config}
+</textarea>
 
 </body>
 </html>

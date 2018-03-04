@@ -51,24 +51,23 @@ body {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">CoOvWe</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Learn</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Configure</a></li>
+            <li><a href="#">List</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Create map</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Connect</a></li>
           </ul>
         </li>
       </ul>
@@ -79,15 +78,18 @@ body {
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a href="#">Login</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${a.printlanguage()} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <form action="/" method="post">
+  			<li>
+  				<button type="submit" name="langIndex" value="pl" class="btn-link">Polski</button>
+			</li>
+            <li>
+            	<button type="submit" name="langIndex" value="eng" class="btn-link">English</button>
+            </li>
+            </form>
           </ul>
         </li>
       </ul>
@@ -104,27 +106,40 @@ body {
   		<br>
   
   		<div class="row align-items-end">
+			
 			<div class="col-md-4" align="left">
 				<form action="configuration" method="post">
-  				<div class="form-group">
-				    <label for="inputsm">Name:</label>
-				    <input class="form-control input-sm" id="name" name="name" type="text">
-				    <button type="submit" class="btn btn-default" value="Submit">Submit</button>
-				</div>
+	
+					<label for="nameInput">Name:</label>
+					<input class="form-control input-sm" id="name" name="name" type="text">
+						
+					<label for="passInput">Password:</label>
+					<input class="form-control" id="passwordInput" name="password" type="text">
+						
+					<button type="submit" class="btn btn-default" value="Submit">Submit</button>
+				
 				</form>
+  			
   			</div>
+  			
   			<div class="col-md-4" align="center">
-  			<img alt="Poker" src="poker.jpg" height="100%" width="100%">
+  			
+  			<!-- <img alt="Poker" src="poker.jpg" height="100%" width="100%"> -->
+  			
   			</div>
+  			
   			<div class="col-md-4">
-	  			<ul class="nav nav-tabs">
-				  <li role="presentation" id="serialBTN" class="active" onclick="connectionMenu(1)"><a href="#">Serial</a></li>
-				  <li role="presentation" id="sshBTN" class="" onclick="connectionMenu(2)"><a href="#">SSH</a></li>
-				  <li role="presentation" id="telnetBTN" class="" onclick="connectionMenu(3)"><a href="#">Telnet</a></li>
-				  <li role="presentation" id="rawBTN" class="" onclick="connectionMenu(4)"><a href="#">Raw-text</a></li>
-				</ul>
-				<iframe id="frame" src="/configuration/serial" frameborder="0" width="100%" height="auto"></iframe>
+	  			<div class="modal-content">
+		  			<ul class="nav nav-tabs">
+					  <li role="presentation" id="serialBTN" class="active" onclick="connectionMenu(1)"><a href="#">Serial</a></li>
+					  <li role="presentation" id="sshBTN" class="" onclick="connectionMenu(2)"><a href="#">SSH</a></li>
+					  <li role="presentation" id="telnetBTN" class="" onclick="connectionMenu(3)"><a href="#">Telnet</a></li>
+					  <li role="presentation" id="rawBTN" class="" onclick="connectionMenu(4)"><a href="#">Raw-text</a></li>
+					</ul>
+					<iframe id="frame" src="/configuration/serial" frameborder="0" width="100%" height="auto"></iframe>
+	  			</div>
   			</div>
+  		
   		</div>
   		
   </div>
@@ -140,15 +155,14 @@ body {
 			<div class="col-md-6" align="left">
 	  			<div class="dropup">
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    idź
+				    skip to
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-				    <li><a href="#">Action</a></li>
-				    <li><a href="#">Another action</a></li>
-				    <li><a href="#">Something else here</a></li>
+				    <li><a href="#">Home</a></li>
+				    <li><a href="#">Your account</a></li>
 				    <li role="separator" class="divider"></li>
-				    <li><a href="#">Separated link</a></li>
+				    <li><a href="#">Configurator</a></li>
 				  </ul>
 				</div>
 			</div>
