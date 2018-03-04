@@ -41,6 +41,9 @@ body {
 
 <div class="container" align="center">
 
+
+<!-- NAVBAR TOP -->
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -97,16 +100,23 @@ body {
   </div><!-- /.container-fluid -->
 </nav>
 
+
+
+<!-- CONTENT -->
   
   <div class="container">
+  		
+  		<!-- TITLE -->
   		<div class="row">
 	  		<h1>Device configurator</h1>
 	  		<p>Welcome page</p> 
   		</div>
   		<br>
   
+  		<!-- I row -->
   		<div class="row align-items-end">
 			
+			<!-- TOP LEFT -->
 			<div class="col-md-4" align="left">
 				<form action="configuration" method="post">
 	
@@ -122,12 +132,15 @@ body {
   			
   			</div>
   			
+  			<!-- TOP CENTER -->
   			<div class="col-md-4" align="center">
   			
   			<!-- <img alt="Poker" src="poker.jpg" height="100%" width="100%"> -->
   			
   			</div>
   			
+  			
+  			<!-- TOP RIGHT -->
   			<div class="col-md-4">
 	  			<div class="modal-content">
 		  			<ul class="nav nav-tabs">
@@ -142,12 +155,126 @@ body {
   		
   		</div>
   		
+  		<br>
+  		
+  		<!-- II row confmenu -->
+  		<div class="row align-items-end">
+  			<div class="btn-group">
+	  			<button id="collapseAllBTN" type="button" class="btn btn-warning" onclick="configurationMenuAll()">Show all</button>
+	  			<button id="basicBTN" type="button" class="btn" onclick="configurationMenu('basicBTN')">Basic</button>
+	  			<button id="advance1BTN" type="button" class="btn"  onclick="configurationMenu('advance1BTN')">Advance I</button>
+	  			<button id="advance2BTN" type="button" class="btn" onclick="configurationMenu('advance2BTN')">Advance II</button>
+	  			<button id="advance3BTN" type="button" class="btn" onclick="configurationMenu('advance3BTN')">Advance III</button>
+  			</div>
+  		</div>
+  		
+  		<br>
+  		
+  		<!-- II row basic -->
+  		<div class="row align-items-end">	
+  			<div id="basicBTNcollapse" class="collapse">
+	  			<div class="panel panel-primary">
+	  				<div class="panel panel-heading">
+	  					<h5>Basic</h5>
+	  				</div>
+	  				<div class="panel panel-body">
+				  		<div class="col-md-4">
+				  			<h1>21</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+				  			<h1>22</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+							<h1>23</h1>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+  		
+  		<!-- III row Advance I -->
+  		<div class="row align-items-end">	
+  			<div id="advance1BTNcollapse" class="collapse">
+		  		<div class="panel panel-primary">
+	  				<div class="panel panel-heading">
+	  					<h5>Basic</h5>
+	  				</div>
+	  				<div class="panel panel-body">
+				  		<div class="col-md-4">
+				  			<h1>21</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+				  			<h1>22</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+							<h1>23</h1>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+  		
+  		<!-- IV row Advance II -->
+  		<div class="row align-items-end">	
+  			<div id="advance2BTNcollapse" class="collapse">
+		  		<div class="panel panel-primary">
+	  				<div class="panel panel-heading">
+	  					<h5>Basic</h5>
+	  				</div>
+	  				<div class="panel panel-body">
+				  		<div class="col-md-4">
+				  			<h1>21</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+				  			<h1>22</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+							<h1>23</h1>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+  		
+  		<!-- V row Advance III -->
+  		<div class="row align-items-end">	
+  			<div id="advance3BTNcollapse" class="collapse">
+		  		<div class="panel panel-primary">
+	  				<div class="panel panel-heading">
+	  					<h5>Basic</h5>
+	  				</div>
+	  				<div class="panel panel-body">
+				  		<div class="col-md-4">
+				  			<h1>21</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+				  			<h1>22</h1>
+				  		</div>
+				  		
+				  		<div class="col-md-4">
+							<h1>23</h1>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+  		
   </div>
 
 
 
+<!-- FOOTER -->
 
 
+
+<!-- NAV BOTTOM -->
 <nav class="navbar navbar-fixed-bottom" role="navigation" style="height: auto" >
   
   	<div class="container">
@@ -167,7 +294,7 @@ body {
 				</div>
 			</div>
 			<div class="col-md-6" align="right">
-	  			<button type="button" class="btn btn-default">
+	  			<button type="button" class="btn btn-default" onclick="goTop()">
 	  				<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 				</button>
 			</div>
@@ -178,6 +305,9 @@ body {
 
 
 <script>
+
+var collapsed = true;
+
 function connectionMenu(x) {
 	
 	document.getElementById("serialBTN").classList.remove('active');
@@ -203,6 +333,70 @@ function connectionMenu(x) {
 		document.getElementById("rawBTN").classList.add('active');
 		}
     
+}
+
+function configurationMenu(buttonName){
+
+	document.getElementById(buttonName).classList.toggle('active');
+	document.getElementById(buttonName).classList.toggle('btn-success');
+	
+	if(document.getElementById(buttonName).classList.contains('active')){
+		document.getElementById((buttonName + 'collapse')).classList.remove('collapse');
+	} else {
+		document.getElementById((buttonName + 'collapse')).classList.add('collapse');
+	}
+	
+}
+
+function setBTN(buttonName){
+	if(!document.getElementById(buttonName).classList.contains('active')) document.getElementById(buttonName).classList.add('active');
+	if(!document.getElementById(buttonName).classList.contains('btn-success')) document.getElementById(buttonName).classList.add('btn-success');
+	document.getElementById((buttonName + 'collapse')).classList.remove('collapse');
+}
+
+function resetBTN(buttonName){
+	document.getElementById(buttonName).classList.remove('active');
+	document.getElementById(buttonName).classList.remove('btn-success');
+	if(!document.getElementById((buttonName + 'collapse')).classList.contains('collapse')) document.getElementById((buttonName + 'collapse')).classList.add('collapse');
+}
+
+
+function configurationMenuAll(){
+
+	if(collapsed){
+		
+		document.getElementById('collapseAllBTN').classList.add('active');
+		document.getElementById('collapseAllBTN').innerHTML = 'Hide all';
+		setBTN('basicBTN');
+		setBTN('advance1BTN');
+		setBTN('advance2BTN');
+		setBTN('advance3BTN');
+		
+		collapsed = false;
+		return;
+	
+	}
+	
+	if(collapsed == false) {
+		
+		document.getElementById('collapseAllBTN').classList.remove('active');
+		document.getElementById('collapseAllBTN').innerHTML = 'Show all';
+		resetBTN('basicBTN');
+		resetBTN('advance1BTN');
+		resetBTN('advance2BTN');
+		resetBTN('advance3BTN');
+		
+		collapsed = true;
+		return;
+		
+	}
+	
+	
+}
+
+
+function goTop(){
+	$('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 </script>
 
