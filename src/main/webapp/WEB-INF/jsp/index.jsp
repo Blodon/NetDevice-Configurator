@@ -29,15 +29,22 @@ body {
 	
 	background-color: rgb(155, 180, 255);
 	
-	padding-bottom: 120px;
+	padding-bottom: 200px;
 	
 }
+#myInput {
+    padding: 20px;
+    margin-top: -6px;
+    border: 0;
+    border-radius: 0;
+    background: #f1f1f1;
+  }
 
 </style>
  
 </head>
 
-<body>
+<body onload="fillLoadedConfig()" >
 
 <div class="container" align="center">
 
@@ -117,19 +124,22 @@ body {
   		<div class="row align-items-end">
 			
 			<!-- TOP LEFT -->
-			<div class="col-md-4" align="left">
-				<form action="configuration" method="post">
-	
-					<label for="nameInput">Name:</label>
-					<input class="form-control input-sm" id="name" name="name" type="text">
-						
-					<label for="passInput">Password:</label>
-					<input class="form-control" id="passwordInput" name="password" type="text">
-						
-					<button type="submit" class="btn btn-default" value="Submit">Submit</button>
+			<div class="col-md-4" align="center">
+			
+				<div class="dropdown">
+				    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="focusSearch()" >Load Configuration
+				    <span class="caret"></span></button>
+				    <ul class="dropdown-menu">
+				      <input class="form-control" id="myInput" type="text" placeholder="Search.." onkeyup="searchSaved()">
+				      <li><a href="#">Conf1</a></li>
+				      <li><a href="#">MyRouter</a></li>
+				      <li><a href="#">new config</a></li>
+				      <li><a href="#">2011011</a></li>
+				      <li><a href="#">Best Config</a></li>
+				      <li><a href="#">Configure</a></li>
+				    </ul>
+	  			</div>
 				
-				</form>
-  			
   			</div>
   			
   			<!-- TOP CENTER -->
@@ -170,6 +180,7 @@ body {
   		
   		<br>
   		
+  		<form action="configuration" method="post">
   		<!-- II row basic -->
   		<div class="row align-items-end">	
   			<div id="basicBTNcollapse" class="collapse">
@@ -179,15 +190,23 @@ body {
 	  				</div>
 	  				<div class="panel panel-body">
 				  		<div class="col-md-4">
-				  			<h1>21</h1>
+							
+				
+								<label for="nameInput">Name:</label>
+								<input class="form-control input-sm" id="nameInput" name="name" type="text">
+									
+								<label for="passwordInput">Password:</label>
+								<input class="form-control" id="passwordInput" name="password" type="text">
+									
+		
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-				  			<h1>22</h1>
+				  			<h1>B 2</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-							<h1>23</h1>
+							<h1>B 3</h1>
 						</div>
 					</div>
 				</div>
@@ -199,19 +218,19 @@ body {
   			<div id="advance1BTNcollapse" class="collapse">
 		  		<div class="panel panel-primary">
 	  				<div class="panel panel-heading">
-	  					<h5>Basic</h5>
+	  					<h5>Advance I</h5>
 	  				</div>
 	  				<div class="panel panel-body">
 				  		<div class="col-md-4">
-				  			<h1>21</h1>
+				  			<h1>A I 1</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-				  			<h1>22</h1>
+				  			<h1>A I 2</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-							<h1>23</h1>
+							<h1>A I 3</h1>
 						</div>
 					</div>
 				</div>
@@ -223,19 +242,19 @@ body {
   			<div id="advance2BTNcollapse" class="collapse">
 		  		<div class="panel panel-primary">
 	  				<div class="panel panel-heading">
-	  					<h5>Basic</h5>
+	  					<h5>Advance II</h5>
 	  				</div>
 	  				<div class="panel panel-body">
 				  		<div class="col-md-4">
-				  			<h1>21</h1>
+				  			<h1>A II 1</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-				  			<h1>22</h1>
+				  			<h1>A II 2</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-							<h1>23</h1>
+							<h1>A II 3</h1>
 						</div>
 					</div>
 				</div>
@@ -247,33 +266,114 @@ body {
   			<div id="advance3BTNcollapse" class="collapse">
 		  		<div class="panel panel-primary">
 	  				<div class="panel panel-heading">
-	  					<h5>Basic</h5>
+	  					<h5>Advance III</h5>
 	  				</div>
 	  				<div class="panel panel-body">
 				  		<div class="col-md-4">
-				  			<h1>21</h1>
+				  			<h1>A III 1</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-				  			<h1>22</h1>
+				  			<h1>A III 2</h1>
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-							<h1>23</h1>
+							<h1>A III 3</h1>
 						</div>
 					</div>
 				</div>
 			</div>	
 		</div>
+		
+		<br><br>
+		
+			
+		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#saveModal">Ready!</button>
+	
+	  <!-- Modal I -->
+	  <div class="modal fade" id="saveModal" role="dialog">
+	    <div class="modal-dialog modal-sm">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Save configuration</h4>
+	        </div>
+	        <div class="modal-body" align="left">
+		        <div class="container">
+		        		<div class="row align-items-end">
+		        			<div class="col-sm-3" align="center">
+	         					<p>Set name for your configuration:</p>
+	         					<input class="form-control input-sm" id="saveNameInput" name="saveName" type="text" placeholder="Enter name..">
+	         					<br>
+	         					<div class="btn-group-vertical">
+		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="saveConfig(1)">Save and send</button>
+		         					<button type="submit" class="btn btn-primary" value="Submit" onclick="sendOption(0);saveConfig(1)">Just save</button>
+		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="saveConfig(0)">Just send</button>
+	         					</div>
+	         					<br>
+	         				</div>	 
+	        			</div>
+	        	</div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>
+	        </div>
+	      </div>
+	   	 </div>
+	    </div>
+	</div>
+
+	  <div class="modal fade" id="sendModal" role="dialog">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Send configuration</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="container">
+	        		<div class="row align-items-end">
+	        			<div class="col-sm-2" align="left">
+	        				<p>Send over:</p>
+	        				<div class="radio">
+						      <label><input type="radio" name="optradio" value="1" onclick="setSendFrame('serial') ; sendOption(1)">Serial</label>
+						    </div>
+						    <div class="radio">
+						      <label><input type="radio" name="optradio" value="2" onclick="setSendFrame('ssh') ; sendOption(2)">SSH</label>
+						    </div>
+						    <div class="radio">
+						      <label><input type="radio" name="optradio" value="3"  onclick="setSendFrame('telnet') ; sendOption(3)">Telnet</label>
+						    </div>
+	        			</div>
+	        			<div class="col-sm-4" align="center">
+	        				<iframe id="sendFrame" src="/configuration/serial" frameborder="0" width="auto" height="auto"></iframe>
+	        			</div>	        	
+	        			<div class="col-sm-2" align="center">
+	        				<button type="submit" class="btn btn-primary" value="Submit">Send</button>
+	        			</div>	        		
+	        		</div>
+	        	</div>
+	        </div>
+	        <div class="modal-footer">
+	        <input type="hidden" name="sendOver" value="0">
+	        <input type="hidden" name="saveConfig" value="0">
+	          <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>
+	        </div>
+	      </div>
+	   	 </div>
+	    </div>
+		
+		</form>
   		
   </div>
 
 
 
 <!-- FOOTER -->
-
-
-
+<br>
+<br>
+<p class="text-muted">Easy footer here by Blodon</p>
+<br>
+<br>
 <!-- NAV BOTTOM -->
 <nav class="navbar navbar-fixed-bottom" role="navigation" style="height: auto" >
   
@@ -308,6 +408,10 @@ body {
 
 var collapsed = true;
 
+function focusSearch(){
+document.getElementById("myInput").focus();
+}
+
 function connectionMenu(x) {
 	
 	document.getElementById("serialBTN").classList.remove('active');
@@ -335,6 +439,23 @@ function connectionMenu(x) {
     
 }
 
+function setSendFrame(page){
+	
+	page = '/configuration/' + page;
+	
+	document.getElementById("sendFrame").src = page;
+	
+}
+
+function sendOption(connectionType){
+	document.getElementById('sendOver').value = connectionType;
+}
+
+function saveConfig(saveT){
+	document.getElementById('saveConfig').value = saveT;
+	
+}
+
 function configurationMenu(buttonName){
 
 	document.getElementById(buttonName).classList.toggle('active');
@@ -359,6 +480,15 @@ function resetBTN(buttonName){
 	document.getElementById(buttonName).classList.remove('btn-success');
 	if(!document.getElementById((buttonName + 'collapse')).classList.contains('collapse')) document.getElementById((buttonName + 'collapse')).classList.add('collapse');
 }
+
+
+function fillLoadedConfig(){
+	
+	document.getElementById('nameInput').value = 'name';
+	
+	
+}
+
 
 
 function configurationMenuAll(){
@@ -397,6 +527,18 @@ function configurationMenuAll(){
 
 function goTop(){
 	$('html, body').animate({ scrollTop: 0 }, 'fast');
+}
+
+function searchSaved(){
+	
+$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $(".dropdown-menu li").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
 }
 </script>
 
