@@ -33,8 +33,9 @@
 					<label class="col-sm-2 col-form-label">Port:</label>
 				    <div class="col-sm-10">
 						<select class="form-control form-control-sm">
-						  <option>COM10</option>
-						  <option>COM11</option>
+						<c:forEach var="weightDTO" items="${portList}" varStatus="index">	
+							<option>${portList.get(index)}</option>
+						</c:forEach>  
 						</select>
 				    </div>
 				    
@@ -46,6 +47,8 @@
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm">
 						  <option>9600</option>
+						  <option>19200</option>
+						  <option>38400</option>
 						  <option>115200</option>
 						</select>
 					</div>
@@ -54,13 +57,13 @@
 				  <div class="form-group row">
 				    <label for="inputPassword" class="col-sm-2 col-form-label">Data bits</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputDataBits" placeholder="8">
+				      <input type="number" class="form-control" id="inputDataBits" value="8">
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputPassword" class="col-sm-2 col-form-label">Stop bits</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputStopBits" placeholder="1">
+				      <input type="number" class="form-control" id="inputStopBits" value="1">
 				    </div>
 				  </div>
 				  <div class="form-group row">
@@ -79,7 +82,7 @@
 				  <div class="form-group row">
 					<label class="col-sm-2 col-form-label">Flow control:</label>
 					<div class="col-sm-10">
-						<select class="form-control form-control-sm" placeholder="XON/XOFF">
+						<select class="form-control form-control-sm" name="flowControl">
 						  <option>None</option>
 						  <option>XON/XOFF</option>
 						  <option>RTS/CTS</option>
@@ -88,11 +91,28 @@
 					</div>
 				</div>		
 		
-		
 				<button type="submit" class="btn btn-default" value="Submit">Submit</button>
 			</form>
 		
 		</div>
+		
+
+<script>
+
+function fillInputs(){
+	
+	
+	
+}
+
+function SendInputs(){
+	
+	
+	
+}
+
+</script>
+
 		
 				<!-- jQuery library -->
 		<script src="jquery-3.3.1.js"></script> 

@@ -12,6 +12,8 @@ import pl.com.configurator.*;
 import pl.com.configurator.ConfigurationDTO.ConfigurationDTO;
 import pl.com.configurator.ConfigurationDTO.service.AccessService;
 
+import pl.com.configurator.Serial.SerialConnect;
+
 
 @RestController
 public class ConfigurationController {
@@ -19,6 +21,7 @@ public class ConfigurationController {
 	@Autowired
 	private AccessService AccessService;
 
+	private SerialConnect serialConnect = new SerialConnect();
 	
 	/** Configuration Menu **/
 	@RequestMapping("/configuration")
@@ -47,6 +50,7 @@ public class ConfigurationController {
 	public ModelAndView serialConfigCON() {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/serial");
+		if(serialConnect.showPortList().size()!=0) model.addObject("portList",serialConnect.showPortList());
 	
 		return model;
 	}	
