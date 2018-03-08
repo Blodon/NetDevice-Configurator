@@ -55,6 +55,14 @@ public class ConfigurationController {
 		return model;
 	}	
 	
+
+	@PostMapping(value = "/serial")
+	public String receiveParam(@RequestParam(value = "parity") String parity) {
+		
+		return parity; 
+	}	
+	
+	
 	/** SSH connection configuration **/
 	@RequestMapping("/configuration/ssh")
 	public ModelAndView sshConfigCON() {
