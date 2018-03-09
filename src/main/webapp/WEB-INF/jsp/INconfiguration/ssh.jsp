@@ -33,13 +33,13 @@
 				  <div class="form-group row">
 				    <label for="inputSSHip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputSSHip" placeholder="127.0.0.1">
+				      <input type="text" class="form-control" id="inputSSHip" value="127.0.0.1">
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputSSHport" class="col-sm-2 col-form-label">Port:</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputSSHport" placeholder="22" >
+				      <input type="number" class="form-control" id="inputSSHport" value="22" >
 				    </div>
 				  </div>
 				  
@@ -49,10 +49,49 @@
 		
 		</div>
 		
-				<!-- jQuery library -->
-		<script src="jquery-3.3.1.js"></script> 
-				<!-- Latest compiled JavaScript -->
+
+		<!-- jQuery library -->
+		<script src="/jquery-3.3.1.js"></script> 
+		 
+		<!-- Latest compiled JavaScript -->
 		<script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-				 
+		 
+
+<script>
+
+function fillInputs(SSHip, SSHport){
+	
+	document.getElementById('inputSSHip').value = SSHip;
+	document.getElementById('inputSSHport').value = SSHport;
+	
+}
+
+function sendInput(param){
+	
+	var val = document.getElementById(param).value;
+	
+	var parity = "{\"sshIP\": \"" + param +"\"}";
+	
+	console.log(parity);
+	
+		$.post("/ssh", {
+			parity: param
+		} ,
+	        function(data,status){
+	            alert(data + status);
+		},"text");
+	
+		
+		
+}
+
+function toDefault(){
+	
+	fillInputs("127.0.0.1", 22);
+	
+}
+
+</script>
+ 
 	</body>
 </html>

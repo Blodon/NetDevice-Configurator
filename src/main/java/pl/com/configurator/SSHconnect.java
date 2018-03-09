@@ -1,5 +1,10 @@
 package pl.com.configurator;
 
-public interface SSHconnect {
+import com.jcraft.jsch.*;
 
+public class SSHconnect {
+
+	
+	// fill using jsch library
+	
 }

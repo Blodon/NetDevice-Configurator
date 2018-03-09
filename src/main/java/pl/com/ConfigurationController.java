@@ -57,7 +57,7 @@ public class ConfigurationController {
 	
 
 	@PostMapping(value = "/serial")
-	public String receiveParam(@RequestParam(value = "parity") String parity) {
+	public String receiveParamSerial(@RequestParam(value = "parity") String parity) {
 		
 		return parity; 
 	}	
@@ -72,6 +72,14 @@ public class ConfigurationController {
 		return model;
 	}	
 	
+
+	@PostMapping(value = "/ssh")
+	public String receiveParamSSH(@RequestParam(value = "sshIP") String sshIP) {
+		
+		return sshIP; 
+	}	
+	
+	
 	/** Telnet connection configuration **/
 	@RequestMapping("/configuration/telnet")
 	public ModelAndView telnetConfigCON() {
@@ -80,6 +88,14 @@ public class ConfigurationController {
 	
 		return model;
 	}	
+	
+
+	@PostMapping(value = "/telnet")
+	public String receiveParamTelnet(@RequestParam(value = "telnetIP") String telnetIP) {
+		
+		return telnetIP; 
+	}	
+	
 	
 	/** Raw text view **/
 	@RequestMapping("/configuration/raw")
