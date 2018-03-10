@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.com.configurator.*;
+import pl.com.configurator.ConfigGenerator;
+import pl.com.configurator.Parameters;
 import pl.com.configurator.ConfigurationDTO.ConfigurationDTO;
 import pl.com.configurator.ConfigurationDTO.service.AccessService;
 
@@ -20,6 +21,8 @@ public class ConfigurationController {
 
 	@Autowired
 	private AccessService AccessService;
+	
+	private Parameters parameters = new Parameters();
 
 	private SerialConnect serialConnect = new SerialConnect();
 	
@@ -57,9 +60,24 @@ public class ConfigurationController {
 	
 
 	@PostMapping(value = "/serial")
-	public String receiveParamSerial(@RequestParam(value = "parity") String parity) {
+	public String receiveParamSerial(
+			@RequestParam(value = "serialPort") String serialPort,
+			@RequestParam(value = "serialBaudrate") Integer serialBaudrate,
+			@RequestParam(value = "serialDataBits") Integer serialDataBits,
+			@RequestParam(value = "serialStopBits") Integer serialStopBits,
+			@RequestParam(value = "serialParityBits") String serialParityBits,
+			@RequestParam(value = "serialFlowControl") String serialFlowControl) {
 		
-		return parity; 
+			if(parameters.setSerialParameters(serialPort,
+					serialBaudrate,
+					serialDataBits,
+					serialStopBits,
+					serialParityBits,
+					serialFlowControl))
+					return "200";
+		
+		
+		return "400"; 
 	}	
 	
 	
@@ -74,9 +92,13 @@ public class ConfigurationController {
 	
 
 	@PostMapping(value = "/ssh")
-	public String receiveParamSSH(@RequestParam(value = "sshIP") String sshIP) {
+	public String receiveParamSSH(
+			@RequestParam(value = "sshIP") String sshIP,
+			@RequestParam(value = "sshPort") Integer sshPort) {
 		
-		return sshIP; 
+		if(parameters.setSSHParameters(sshIP, sshPort)) return "200";
+		
+		return "400"; 
 	}	
 	
 	
@@ -91,9 +113,13 @@ public class ConfigurationController {
 	
 
 	@PostMapping(value = "/telnet")
-	public String receiveParamTelnet(@RequestParam(value = "telnetIP") String telnetIP) {
+	public String receiveParamTelnet(
+			@RequestParam(value = "telnetIP") String telnetIP,
+			@RequestParam(value = "telnetPort") Integer telnetPort) {
 		
-		return telnetIP; 
+		if(parameters.setTelnetParameters(telnetIP, telnetPort)) return "200";
+		
+		return "400"; 
 	}	
 	
 	
