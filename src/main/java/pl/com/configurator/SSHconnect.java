@@ -1,6 +1,6 @@
 package pl.com.configurator;
 
-import com.jcraft.jsch.*;
+//import com.jcraft.jsch.*;
 
 public class SSHconnect {
 

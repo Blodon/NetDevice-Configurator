@@ -22,7 +22,7 @@
 		</style>
 	 
 	</head>
-	<body onload="fillInputs(2, 2, 3, 8, 1)">
+	<body onload="fillInputs(${typedParameters})">
 	
 		<div class="container" align="left">
 		
@@ -52,37 +52,41 @@
 				
 					<label class="col-sm-2 col-form-label">Baudrate:</label>
 					<div class="col-sm-10">
-						<select class="form-control form-control-sm" name="baudRate"  onchange="sendInput('baudRate')">
-						  <option id="br1">9600
-						  <option id="br2">19200
-						  <option id="br3">38400
-						  <option id="br4">115200
+						<select class="form-control form-control-sm" id="baudRate" name="baudRate"  onchange="sendInput('baudRate')">
+						  <option id="br-9600" value="9600">9600
+						  <option id="br-19200" value="19200">19200
+						  <option id="br-38400" value="38400">38400
+						  <option id="br-115200" value="115200">115200
 						</select>
+						<h5 class="text-success" id="baudRateInfo"></h5>
 					</div>
 					
 				</div>
 				  <div class="form-group row">
 				    <label for="inputPassword" class="col-sm-2 col-form-label">Data bits:</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputDataBits" name="dataBits" value="8">
+						<input type="number" class="form-control" id="inputDataBits" name="dataBits" value="8" onchange="sendInput('inputDataBits')">
+						<h5 class="text-success" id="inputDataBitsInfo"></h5>				   
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputPassword" class="col-sm-2 col-form-label">Stop bits:</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputStopBits" name="stopBits" value="1">
+						<input type="number" class="form-control" id="inputStopBits" name="stopBits" value="1" onchange="sendInput('inputStopBits')">
+						<h5 class="text-success" id="inputStopBitsInfo"></h5>
 				    </div>
 				  </div>
 				  <div class="form-group row">
 					<label class="col-sm-2 col-form-label">Parity bits:</label>
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm" id="parity" name="parity" onchange="sendInput('parity')">
-						  <option id="p1" vlaue="1">None
-						  <option id="p2" vlaue="2">Odd
-						  <option id="p3" vlaue="3">Even
-						  <option id="p4" vlaue="4">Mark
-						  <option id="p5" vlaue="5">Space
+						  <option id="p-None" vlaue="None">None
+						  <option id="p-Odd" vlaue="Odd">Odd
+						  <option id="p-Even" vlaue="Even">Even
+						  <option id="p-Mark" vlaue="Mark">Mark
+						  <option id="p-Space" vlaue="Space">Space
 						</select>
+						<h5 class="text-success" id="parityInfo"></h5>
 					</div>
 				</div>
 		
@@ -90,19 +94,17 @@
 					<label class="col-sm-2 col-form-label">Flow control:</label>
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm" id="flowControl" name="flowControl"  onchange="sendInput('flowControl')">
-						  <option id="f1" vlaue="1">None
-						  <option id="f2" vlaue="2">XON/XOFF
-						  <option id="f3" vlaue="3">RTS/CTS
-						  <option id="f4" vlaue="4">DSR/DTR
+						  <option id="f-None" vlaue="None">None
+						  <option id="f-XON/XOFF" vlaue="XON/OFF">XON/XOFF
+						  <option id="f-RTS/CTS" vlaue="RTS/CTS">RTS/CTS
+						  <option id="f-DSR/DTR" vlaue="DSR/DTR">DSR/DTR
 						</select>
+						<h5 class="text-success" id="flowControlInfo"></h5>
 					</div>
 				</div>	
 					<div class="container">	
 						<div class="row align-items-end">
-							<div class="col-sm-3" align="left">		
-								<button type="submit" class="btn btn-lg btn-default" value="Submit">Submit</button>
-							</div>
-							<div class="col-sm-3" align="right">	
+							<div class="col-sm-6" align="right">	
 								<button type="reset" class="btn btn-sm btn-warning" onclice="toDefault()" align="right">Set default</button>
 							</div>
 						</div>
@@ -120,35 +122,59 @@
 
 <script>
 
+var serialPortV ="NULL";
+
+
 function fillInputs(baudrateID, parityID, flowID, databits, stopbits){
 	
-	baudrateID = 'br' + baudrateID;
-	parityID = 'p' + parityID;
-	flowID = 'f' + flowID;
+	
+	baudrateID = 'br-' + baudrateID;
+	parityID = 'p-' + parityID;
+	flowID = 'f-' + flowID;
+	
 	
 	document.getElementById(baudrateID).selected = true;
 	document.getElementById(parityID).selected = true;
 	document.getElementById(flowID).selected = true;
 	
-	document.getElementById('dataBits').value = databits;
-	document.getElementById('stopBits').value = stopbits;
+	document.getElementById('inputDataBits').value = databits;
+	document.getElementById('inputStopBits').value = stopbits;
+	
 	
 }
 
+
 function sendInput(param){
 	
-	var val = document.getElementById(param).value;
+	var info = param + "Info";
 	
-	var parity = "{\"parity\": \"" + param +"\"}";
+	//var parity = "{\"parity\": \"" + param +"\"}";
 	
 	console.log(parity);
 	
 		$.post("/serial", {
-			parity: param
+			serialPort: "null",
+			serialBaudrate: $( "#baudRate" ).val(),
+			serialDataBits: $( "#inputDataBits" ).val(),
+			serialStopBits: $( "#inputStopBits" ).val(),
+			serialParityBits: $( "#parity" ).val(),
+			serialFlowControl: $( "#flowControl" ).val()
+			
 		} ,
 	        function(data,status){
-	            alert(data + status);
-		},"text");
+	            if(data == "200"){
+	            	if(document.getElementById(info).classList.contains("text-danger"))
+	            		document.getElementById(info).classList.remove("text-danger");
+	            	if(document.getElementById(info).classList.contains("text-success"))
+		            		document.getElementById(info).classList.add("text-success");
+	            } else {
+	            	if(document.getElementById(info).classList.contains("text-success"))
+	            		document.getElementById(info).classList.remove("text-success");
+	            	if(document.getElementById(info).classList.contains("text-danger"))
+		            		document.getElementById(info).classList.add("text-danger");
+	            }
+	            document.getElementById(info).innerHTML = "saving parameter " + status;
+		});
 	
 		
 		
@@ -156,7 +182,7 @@ function sendInput(param){
 
 function toDefault(){
 	
-	fillInputs(1,1,1,8,1);
+	fillInputs(3,1,1,8,1);
 	
 }
 

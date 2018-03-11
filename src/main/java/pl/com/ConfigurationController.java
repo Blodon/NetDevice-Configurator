@@ -2,7 +2,6 @@ package pl.com;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +53,7 @@ public class ConfigurationController {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/serial");
 		if(serialConnect.showPortList().size()!=0) model.addObject("portList",serialConnect.showPortList());
+		model.addObject("typedParameters", parameters.typedSerialSettings());
 	
 		return model;
 	}	
@@ -62,16 +62,21 @@ public class ConfigurationController {
 	@PostMapping(value = "/serial")
 	public String receiveParamSerial(
 			@RequestParam(value = "serialPort") String serialPort,
-			@RequestParam(value = "serialBaudrate") Integer serialBaudrate,
-			@RequestParam(value = "serialDataBits") Integer serialDataBits,
-			@RequestParam(value = "serialStopBits") Integer serialStopBits,
+			@RequestParam(value = "serialBaudrate") String serialBaudrate,
+			@RequestParam(value = "serialDataBits") String serialDataBits,
+			@RequestParam(value = "serialStopBits") String serialStopBits,
 			@RequestParam(value = "serialParityBits") String serialParityBits,
 			@RequestParam(value = "serialFlowControl") String serialFlowControl) {
 		
+				
+				Integer serialBaudrateI = Integer.parseInt(serialBaudrate);
+				Integer serialDataBitsI = Integer.parseInt(serialDataBits);
+				Integer serialStopBitsI = Integer.parseInt(serialStopBits);
+		
 			if(parameters.setSerialParameters(serialPort,
-					serialBaudrate,
-					serialDataBits,
-					serialStopBits,
+					serialBaudrateI,
+					serialDataBitsI,
+					serialStopBitsI,
 					serialParityBits,
 					serialFlowControl))
 					return "200";
@@ -129,10 +134,8 @@ public class ConfigurationController {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/raw");
 		
-		//String config ="";
 		ConfigGenerator configGenerator = new ConfigGenerator();
 		
-		//config = configGenerator.print(AccessService.getAllConfigurationData().get(0));
 		
 		model.addObject("config", configGenerator.print(AccessService.getAllConfigurationData().get(0)));
 		model.addObject("configLines", configGenerator.linesCount());

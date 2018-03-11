@@ -18,7 +18,11 @@ public class Parameters {
 	
 	
 	public Parameters(){
-	
+		serialBaudrate = 9600;
+		serialDataBits = 8;
+		serialStopBits = 1;
+		serialParityBits = "None";
+		serialFlowControl = "None";
 	}
 	
 	public boolean setSerialParameters(String serialPort,
@@ -89,6 +93,24 @@ public class Parameters {
 		};
 		
 		return params;
+	}
+
+	public String typedSerialSettings() {
+		
+		String settings;
+		
+		settings = serialBaudrate.toString();
+		settings += ", ";
+		settings += serialDataBits.toString();
+		settings += ", ";
+		settings += serialStopBits.toString();
+		settings += ", ";
+		settings += serialParityBits;
+		settings += ", ";
+		settings += serialFlowControl;
+		
+		
+		return settings;
 	}
 	
 }
