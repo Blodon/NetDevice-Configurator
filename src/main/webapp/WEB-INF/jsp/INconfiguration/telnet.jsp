@@ -34,12 +34,14 @@
 				    <label for="inputTelnetip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
 				      <input type="text" class="form-control" id="inputTelnetip" value="127.0.0.1">
+						<h5 class="text-success" id="inputTelnetportInfo"></h5>				 
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputTelnetport" class="col-sm-2 col-form-label">Port:</label>
 				    <div class="col-sm-10">
 				      <input type="number" class="form-control" id="inputTelnetport" value="23">
+						<h5 class="text-success" id="inputTelnetportInfo"></h5>				    
 				    </div>
 				  </div>
 				  
@@ -67,20 +69,28 @@ function fillInputs(Telnetip, Telnetport){
 
 function sendInput(param){
 	
-	var val = document.getElementById(param).value;
+	var info = param + "Info";
 	
-	var parity = "{\"telnetIP\": \"" + param +"\"}";
-	
-	console.log(parity);
-	
-		$.post("/telnet", {
-			parity: param
-		} ,
-	        function(data,status){
-	            alert(data + status);
-		},"text");
-	
-		
+	$.post("/telnet", {
+		telnetIP: $( "#inputTelnetip" ).val(),
+		telnetPort: $( "#inputTelnetport" ).val(),
+					
+	} ,
+        function(data,status){
+            if(data == "200"){
+            	if(document.getElementById(info).classList.contains("text-danger"))
+            		document.getElementById(info).classList.remove("text-danger");
+            	if(document.getElementById(info).classList.contains("text-success"))
+	            		document.getElementById(info).classList.add("text-success");
+            } else {
+            	if(document.getElementById(info).classList.contains("text-success"))
+            		document.getElementById(info).classList.remove("text-success");
+            	if(document.getElementById(info).classList.contains("text-danger"))
+	            		document.getElementById(info).classList.add("text-danger");
+            }
+            document.getElementById(info).innerHTML = "saving parameter " + status;
+	});
+
 		
 }
 

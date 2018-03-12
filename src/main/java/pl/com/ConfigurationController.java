@@ -91,7 +91,8 @@ public class ConfigurationController {
 	public ModelAndView sshConfigCON() {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/ssh");
-	
+		model.addObject("typedParameters", parameters.typedSSHSettings());
+		
 		return model;
 	}	
 	
@@ -112,7 +113,8 @@ public class ConfigurationController {
 	public ModelAndView telnetConfigCON() {
 		
 		ModelAndView model = new ModelAndView("INconfiguration/telnet");
-	
+		model.addObject("typedParameters", parameters.typedTelnetSettings());
+		
 		return model;
 	}	
 	

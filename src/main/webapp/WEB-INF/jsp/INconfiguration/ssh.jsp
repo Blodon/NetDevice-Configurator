@@ -33,18 +33,18 @@
 				  <div class="form-group row">
 				    <label for="inputSSHip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputSSHip" value="127.0.0.1">
+						<input type="text" class="form-control" id="inputSSHip" value="127.0.0.1" onchange="sendInput('inputSSHip')">
+						<h5 class="text-success" id="inputSSHipInfo"></h5>
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputSSHport" class="col-sm-2 col-form-label">Port:</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputSSHport" value="22" >
+						<input type="number" class="form-control" id="inputSSHport" value="22" onchange="sendInput('inputSSHport')">
+						<h5 class="text-success" id="inputSSHportInfo"></h5>
 				    </div>
 				  </div>
 				  
-
-				<button type="submit" class="btn btn-default" value="Submit">Submit</button>
 			</form>
 		
 		</div>
@@ -68,18 +68,27 @@ function fillInputs(SSHip, SSHport){
 
 function sendInput(param){
 	
-	var val = document.getElementById(param).value;
-	
-	var parity = "{\"sshIP\": \"" + param +"\"}";
-	
-	console.log(parity);
+	var info = param + "Info";
 	
 		$.post("/ssh", {
-			parity: param
+			sshIP: $( "#inputSSHip" ).val(),
+			sshPort: $( "#inputSSHport" ).val(),
+						
 		} ,
 	        function(data,status){
-	            alert(data + status);
-		},"text");
+	            if(data == "200"){
+	            	if(document.getElementById(info).classList.contains("text-danger"))
+	            		document.getElementById(info).classList.remove("text-danger");
+	            	if(document.getElementById(info).classList.contains("text-success"))
+		            		document.getElementById(info).classList.add("text-success");
+	            } else {
+	            	if(document.getElementById(info).classList.contains("text-success"))
+	            		document.getElementById(info).classList.remove("text-success");
+	            	if(document.getElementById(info).classList.contains("text-danger"))
+		            		document.getElementById(info).classList.add("text-danger");
+	            }
+	            document.getElementById(info).innerHTML = "saving parameter " + status;
+		});
 	
 		
 		

@@ -23,6 +23,13 @@ public class Parameters {
 		serialStopBits = 1;
 		serialParityBits = "None";
 		serialFlowControl = "None";
+		
+		sshIP = "192.168.0.0";
+		sshPort = 22;
+		
+		telnetIP = "192.168.0.0";
+		telnetPort = 23;
+		
 	}
 	
 	public boolean setSerialParameters(String serialPort,
@@ -109,6 +116,28 @@ public class Parameters {
 		settings += ", ";
 		settings += serialFlowControl;
 		
+		
+		return settings;
+	}
+
+	public String typedSSHSettings() {
+		
+		String settings;
+		
+		settings = sshIP;
+		settings += ", ";
+		settings += sshPort.toString();
+		
+		return settings;
+	}
+
+	public String typedTelnetSettings() {
+		
+		String settings;
+		
+		settings = telnetIP;
+		settings += ", ";
+		settings += telnetPort.toString();
 		
 		return settings;
 	}
