@@ -22,7 +22,7 @@
 		</style>
 	 
 	</head>
-	<body>
+	<body  onload="fillInputs(${typedParameters})">
 	
 		<div class="container" align="left">
 		
@@ -94,11 +94,6 @@ function sendInput(param){
 		
 }
 
-function toDefault(){
-	
-	fillInputs("127.0.0.1", 22);
-	
-}
 
 </script>
  

@@ -105,16 +105,18 @@ public class Parameters {
 	public String typedSerialSettings() {
 		
 		String settings;
-		
-		settings = serialBaudrate.toString();
-		settings += ", ";
+
+		settings = "'";
+		settings += serialBaudrate.toString();
+		settings += "', '";
 		settings += serialDataBits.toString();
-		settings += ", ";
+		settings += "', '";
 		settings += serialStopBits.toString();
-		settings += ", ";
+		settings += "', '";
 		settings += serialParityBits;
-		settings += ", ";
+		settings += "', '";
 		settings += serialFlowControl;
+		settings += "'";
 		
 		
 		return settings;
@@ -124,8 +126,9 @@ public class Parameters {
 		
 		String settings;
 		
-		settings = sshIP;
-		settings += ", ";
+		settings = "'";
+		settings += sshIP;
+		settings += "', ";
 		settings += sshPort.toString();
 		
 		return settings;
@@ -135,8 +138,9 @@ public class Parameters {
 		
 		String settings;
 		
-		settings = telnetIP;
-		settings += ", ";
+		settings = "'";
+		settings += telnetIP;
+		settings += "', ";
 		settings += telnetPort.toString();
 		
 		return settings;

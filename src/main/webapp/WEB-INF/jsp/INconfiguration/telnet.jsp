@@ -22,7 +22,7 @@
 		</style>
 	 
 	</head>
-	<body>
+	<body onload="fillInputs(${typedParameters})">
 	
 		<div class="container" align="left">
 		
@@ -33,20 +33,18 @@
 				  <div class="form-group row">
 				    <label for="inputTelnetip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputTelnetip" value="127.0.0.1">
-						<h5 class="text-success" id="inputTelnetportInfo"></h5>				 
+				      <input type="text" class="form-control" id="inputTelnetip" value="127.0.0.1" onchange="sendInput('inputTelnetip')">
+						<h5 class="text-success" id="inputTelnetipInfo"></h5>				 
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label for="inputTelnetport" class="col-sm-2 col-form-label">Port:</label>
 				    <div class="col-sm-10">
-				      <input type="number" class="form-control" id="inputTelnetport" value="23">
+				      <input type="number" class="form-control" id="inputTelnetport" value="23" onchange="sendInput('inputTelnetport')">
 						<h5 class="text-success" id="inputTelnetportInfo"></h5>				    
 				    </div>
 				  </div>
 				  
-
-				<button type="submit" class="btn btn-default" value="Submit">Submit</button>
 			</form>
 		
 		</div>

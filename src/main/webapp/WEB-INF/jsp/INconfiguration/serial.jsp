@@ -53,10 +53,10 @@
 					<label class="col-sm-2 col-form-label">Baudrate:</label>
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm" id="baudRate" name="baudRate"  onchange="sendInput('baudRate')">
-						  <option id="br-9600" value="9600">9600
-						  <option id="br-19200" value="19200">19200
-						  <option id="br-38400" value="38400">38400
-						  <option id="br-115200" value="115200">115200
+						  <option id="br9600" value="9600">9600
+						  <option id="br19200" value="19200">19200
+						  <option id="br38400" value="38400">38400
+						  <option id="br115200" value="115200">115200
 						</select>
 						<h5 class="text-success" id="baudRateInfo"></h5>
 					</div>
@@ -80,11 +80,11 @@
 					<label class="col-sm-2 col-form-label">Parity bits:</label>
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm" id="parity" name="parity" onchange="sendInput('parity')">
-						  <option id="p-None" vlaue="None">None
-						  <option id="p-Odd" vlaue="Odd">Odd
-						  <option id="p-Even" vlaue="Even">Even
-						  <option id="p-Mark" vlaue="Mark">Mark
-						  <option id="p-Space" vlaue="Space">Space
+						  <option id="pNone" vlaue="None">None
+						  <option id="pOdd" vlaue="Odd">Odd
+						  <option id="pEven" vlaue="Even">Even
+						  <option id="pMark" vlaue="Mark">Mark
+						  <option id="pSpace" vlaue="Space">Space
 						</select>
 						<h5 class="text-success" id="parityInfo"></h5>
 					</div>
@@ -94,10 +94,10 @@
 					<label class="col-sm-2 col-form-label">Flow control:</label>
 					<div class="col-sm-10">
 						<select class="form-control form-control-sm" id="flowControl" name="flowControl"  onchange="sendInput('flowControl')">
-						  <option id="f-None" vlaue="None">None
-						  <option id="f-XON/XOFF" vlaue="XON/OFF">XON/XOFF
-						  <option id="f-RTS/CTS" vlaue="RTS/CTS">RTS/CTS
-						  <option id="f-DSR/DTR" vlaue="DSR/DTR">DSR/DTR
+						  <option id="fNone" vlaue="None">None
+						  <option id="fXON/XOFF" vlaue="XON/OFF">XON/XOFF
+						  <option id="fRTS/CTS" vlaue="RTS/CTS">RTS/CTS
+						  <option id="fDSR/DTR" vlaue="DSR/DTR">DSR/DTR
 						</select>
 						<h5 class="text-success" id="flowControlInfo"></h5>
 					</div>
@@ -105,7 +105,8 @@
 					<div class="container">	
 						<div class="row align-items-end">
 							<div class="col-sm-6" align="right">	
-								<button type="reset" class="btn btn-sm btn-warning" onclice="toDefault()" align="right">Set default</button>
+								<button type="reset" class="btn btn-sm btn-warning" onclick="toDefault()" align="right">Set default</button>
+								<h5 class="text-success" id="resetInfo"></h5>
 							</div>
 						</div>
 					</div>	
@@ -125,12 +126,12 @@
 var serialPortV ="NULL";
 
 
-function fillInputs(baudrateID, parityID, flowID, databits, stopbits){
+function fillInputs(baudrateID, databits, stopbits, parityID, flowID){
 	
 	
-	baudrateID = 'br-' + baudrateID;
-	parityID = 'p-' + parityID;
-	flowID = 'f-' + flowID;
+	baudrateID = 'br' + baudrateID;
+	parityID = 'p' + parityID;
+	flowID = 'f' + flowID;
 	
 	
 	document.getElementById(baudrateID).selected = true;
@@ -182,7 +183,8 @@ function sendInput(param){
 
 function toDefault(){
 	
-	fillInputs(3,1,1,8,1);
+	fillInputs('9600','8', '1', 'None', 'None');
+	sendInput('reset');
 	
 }
 

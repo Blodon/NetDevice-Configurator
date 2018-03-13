@@ -1,5 +1,7 @@
 package pl.com;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,11 +80,14 @@ public class ConfigurationController {
 					serialDataBitsI,
 					serialStopBitsI,
 					serialParityBits,
-					serialFlowControl))
-					return "200";
+					serialFlowControl)) return "200";
+			
+		//	System.out.println(parameters.typedSerialSettings());
+			
+					return "400";
 		
 		
-		return "400"; 
+					
 	}	
 	
 	

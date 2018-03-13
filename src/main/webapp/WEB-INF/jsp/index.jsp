@@ -345,7 +345,7 @@ body {
 						    </div>
 	        			</div>
 	        			<div class="col-sm-4" align="center">
-	        				<iframe id="sendFrame" src="/configuration/serial" frameborder="0" width="auto" height="auto"></iframe>
+	        				<iframe id="sendFrame" src="" frameborder="0" width="auto" height="auto"></iframe>
 	        			</div>	        	
 	        			<div class="col-sm-2" align="center">
 	        				<button type="submit" class="btn btn-primary" value="Submit">Send</button>
