@@ -192,18 +192,22 @@ body {
 				  		<div class="col-md-4">
 							
 				
-								<label for="nameInput">Name:</label>
-								<input class="form-control input-sm" id="nameInput" name="name" type="text">
-									
+								<label for="nameInput">Hostname:</label>
+								<input class="form-control input-sm" id="basic-Hostname" name="name" type="text">
+									<br>
 								<label for="passwordInput">Password:</label>
-								<input class="form-control" id="passwordInput" name="password" type="text">
+								<input class="form-control" id="basic-Password" name="basic-Password" type="text">
 									
 		
 				  		</div>
 				  		
 				  		<div class="col-md-4">
-				  			<h1>B 2</h1>
-				  		</div>
+								<label for="nameInput">Banner:</label>
+								<input class="form-control input-sm" id="basic-Banner" name="Banner" type="text">
+									<br>
+								<label for="passwordInput">Line con 0 password:</label>
+								<input class="form-control" id="basic-LinePassword" name="LinePassword" type="text">
+					  		</div>
 				  		
 				  		<div class="col-md-4">
 							<h1>B 3</h1>
@@ -490,7 +494,6 @@ function fillLoadedConfig(){
 }
 
 
-
 function configurationMenuAll(){
 
 	if(collapsed){
@@ -540,6 +543,36 @@ $(document).ready(function(){
 	  });
 	});
 }
+
+function checkValues(group){
+	
+	
+	return true;
+}
+
+
+function sendPostConfiguration(){
+	
+	var group = "basic";
+	
+	if(checkValues(group)){
+	$.post("/configuration", {
+		basicHostname: $( "#basic-Hostname" ).val(),
+		basicPassword: $( "#basic-Password" ).val(),
+		basicBanner: $( "#basic-Banner" ).val(),
+		basicLineConPass: $( "#basic-LinePass" ).val()
+		
+	} ,
+        function(data,status){
+            if(data == "200"){
+            }
+     });
+	}
+	
+}
+
+
+
 </script>
 
 
