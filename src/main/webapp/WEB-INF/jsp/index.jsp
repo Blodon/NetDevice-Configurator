@@ -44,7 +44,7 @@ body {
  
 </head>
 
-<body onload="fillLoadedConfig()" >
+<body onload="fillLoadedConfig(${sessionID})" >
 
 <div class="container" align="center">
 
@@ -180,7 +180,6 @@ body {
   		
   		<br>
   		
-  		<form action="configuration" method="post">
   		<!-- II row basic -->
   		<div class="row align-items-end">	
   			<div id="basicBTNcollapse" class="collapse">
@@ -310,9 +309,9 @@ body {
 	         					<input class="form-control input-sm" id="saveNameInput" name="saveName" type="text" placeholder="Enter name..">
 	         					<br>
 	         					<div class="btn-group-vertical">
-		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="saveConfig(1)">Save and send</button>
-		         					<button type="submit" class="btn btn-primary" value="Submit" onclick="sendOption(0);saveConfig(1)">Just save</button>
-		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="saveConfig(0)">Just send</button>
+		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="sendOption(1)">Save and send</button>
+		         					<button type="submit" class="btn btn-primary" value="Submit" onclick="sendOption(2)">Just save</button>
+		         					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#sendModal" onclick="sendOption(3)">Just send</button>
 	         					</div>
 	         					<br>
 	         				</div>	 
@@ -352,7 +351,7 @@ body {
 	        				<iframe id="sendFrame" src="" frameborder="0" width="auto" height="auto"></iframe>
 	        			</div>	        	
 	        			<div class="col-sm-2" align="center">
-	        				<button type="submit" class="btn btn-primary" value="Submit">Send</button>
+	        				<button class="btn btn-primary" value="Submit" onclick="sendPostConfiguration()">Send</button>
 	        			</div>	        		
 	        		</div>
 	        	</div>
@@ -365,9 +364,6 @@ body {
 	      </div>
 	   	 </div>
 	    </div>
-		
-		</form>
-  		
   </div>
 
 
@@ -411,9 +407,11 @@ body {
 <script>
 
 var collapsed = true;
+var sessionID;
+var action;
 
 function focusSearch(){
-document.getElementById("myInput").focus();
+	document.getElementById("myInput").focus();
 }
 
 function connectionMenu(x) {
@@ -451,8 +449,8 @@ function setSendFrame(page){
 	
 }
 
-function sendOption(connectionType){
-	document.getElementById('sendOver').value = connectionType;
+function sendOption(sendoption){
+	action = sendoption;
 }
 
 function saveConfig(saveT){
@@ -486,8 +484,9 @@ function resetBTN(buttonName){
 }
 
 
-function fillLoadedConfig(){
+function fillLoadedConfig(sessionid){
 	
+	sessionID = sessionid;
 	document.getElementById('nameInput').value = 'name';
 	
 	
@@ -550,15 +549,50 @@ function checkValues(group){
 	return true;
 }
 
+function settingConfigPOST(){
+	
+	var actionComment;
+	
+	if(action==1) actionComment = 'saveAndSend';
+	else if(action==2) actionComment = 'save';
+	else if(action==3) actionComment = 'send';
+	
+	if(checkValues(group)){
+		$.post("/configuration/informs", {
+			sessionNumber: sessionID,
+			action: actionComment,
+			name: $( "#saveNameInput" ).val()
+			
+		} ,
+	        function(data,status){
+	            if(data == "200"){
+	            }
+	     });
+		}
+}
+
+
+
 
 function sendPostConfiguration(){
 	
 	var group = "basic";
 	
 	if(checkValues(group)){
-	$.post("/configuration", {
+	$.post("/configuration/basic1", {
 		basicHostname: $( "#basic-Hostname" ).val(),
 		basicPassword: $( "#basic-Password" ).val(),
+		
+	} ,
+        function(data,status){
+            if(data == "200"){
+            }
+     });
+	}
+	
+	
+	if(checkValues(group)){
+	$.post("/configuration/basic2", {
 		basicBanner: $( "#basic-Banner" ).val(),
 		basicLineConPass: $( "#basic-LinePass" ).val()
 		
@@ -568,6 +602,8 @@ function sendPostConfiguration(){
             }
      });
 	}
+	
+	settingConfigPOST();
 	
 }
 

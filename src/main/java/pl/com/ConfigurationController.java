@@ -24,28 +24,42 @@ public class ConfigurationController {
 	private AccessService AccessService;
 	
 	private Parameters parameters = new Parameters();
-
 	private SerialConnect serialConnect = new SerialConnect();
+	
+	private int sessionID = 0;
 	
 	/** Configuration Menu **/
 	@RequestMapping("/configuration")
 	public ModelAndView config() {
 		
+		sessionID++;
 		ModelAndView model = new ModelAndView("configuration");
+		model.addObject("sessionID", sessionID);
 	
 		return model;
 	}
 
-	@PostMapping(value = "/configuration")
-	public ModelAndView setConfig(@RequestParam String name, @RequestParam String password) {
+	@PostMapping(value = "/configuration/basic1")
+	public String setBasicConfig1(
+			@RequestParam(value = "basicHostname") String hostname,
+			@RequestParam(value = "basicPassword")  String password) {
 		
 		ConfigurationDTO c = new ConfigurationDTO();
-		c.setName(name);
+		c.setName(hostname);
 		c.setPassword(password);
 		
 		AccessService.saveConfigurationData(c);
 		
-		return new ModelAndView("redirect:/"); 
+		return "200"; 
+	}	
+
+	@PostMapping(value = "/configuration/basic2")
+	public String setBasicConfig2(
+			@RequestParam(value = "basic-Banner") String banner,
+			@RequestParam(value = "basic-LineConPass")  String lineConPass) {
+		
+		if(banner.equals("DEBUG"))return "200"; 
+		else return "400";
 	}	
 	
 	
