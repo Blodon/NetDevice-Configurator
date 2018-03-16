@@ -44,6 +44,8 @@ public class ConfigurationController {
 			@RequestParam(value = "basicHostname") String hostname,
 			@RequestParam(value = "basicPassword")  String password) {
 		
+		//To one mapping with required = false
+		
 		ConfigurationDTO c = new ConfigurationDTO();
 		c.setName(hostname);
 		c.setPassword(password);

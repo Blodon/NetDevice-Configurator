@@ -557,18 +557,34 @@ function settingConfigPOST(){
 	else if(action==2) actionComment = 'save';
 	else if(action==3) actionComment = 'send';
 	
-	if(checkValues(group)){
-		$.post("/configuration/informs", {
-			sessionNumber: sessionID,
-			action: actionComment,
-			name: $( "#saveNameInput" ).val()
-			
-		} ,
-	        function(data,status){
-	            if(data == "200"){
-	            }
-	     });
-		}
+	if(action == 2 || action == 1){
+		if(checkValues(group)){
+			$.post("/configuration/informs", {
+				sessionNumber: sessionID,
+				action: actionComment,
+				name: $( "#saveNameInput" ).val()
+				
+			} ,
+		        function(data,status){
+		            if(data == "200"){
+		            }
+		     });
+			}
+	}
+	
+	if(action == 3){
+		if(checkValues(group)){
+			$.post("/configuration/send", {
+				sessionNumber: sessionID,
+				
+			} ,
+		        function(data,status){
+		            if(data == "200"){
+		            }
+		     });
+			}
+	}
+	
 }
 
 
