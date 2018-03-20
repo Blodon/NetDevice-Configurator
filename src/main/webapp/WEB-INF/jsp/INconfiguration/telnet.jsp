@@ -31,6 +31,20 @@
 				
 				
 				  <div class="form-group row">
+				    <label for="inputTelnetlogin" class="col-sm-2 col-form-label">Login:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputTelnetlogin" onchange="sendInput('inputTelnetlogin')">
+						<h5 class="text-success" id="inputTelnetloginInfo"></h5>				 
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="inputTelnetpassword" class="col-sm-2 col-form-label">Password:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputTelnetpassword" value="127.0.0.1" onchange="sendInput('inputTelnetpassword')">
+						<h5 class="text-success" id="inputTelnetpasswordInfo"></h5>				 
+				    </div>
+				  </div>
+				  <div class="form-group row">
 				    <label for="inputTelnetip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
 				      <input type="text" class="form-control" id="inputTelnetip" value="127.0.0.1" onchange="sendInput('inputTelnetip')">

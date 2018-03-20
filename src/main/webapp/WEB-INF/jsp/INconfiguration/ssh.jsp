@@ -31,6 +31,20 @@
 				
 				
 				  <div class="form-group row">
+				    <label for="inputSSHdomain" class="col-sm-2 col-form-label">Domain name:</label>
+				    <div class="col-sm-10">
+						<input type="text" class="form-control" id="inputSSHdomain" placeholder="example@example.com" onchange="sendInput('inputSSHpassword')">
+						<h5 class="text-success" id="inputSSHdomainInfo"></h5>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="inputSSHpassword" class="col-sm-2 col-form-label">Password:</label>
+				    <div class="col-sm-10">
+						<input type="password" class="form-control" id="inputSSHpassword" onchange="sendInput('inputSSHpassword')">
+						<h5 class="text-success" id="inputSSHpasswordInfo"></h5>
+				    </div>
+				  </div>
+				  <div class="form-group row">
 				    <label for="inputSSHip" class="col-sm-2 col-form-label">Remote IP:</label>
 				    <div class="col-sm-10">
 						<input type="text" class="form-control" id="inputSSHip" value="127.0.0.1" onchange="sendInput('inputSSHip')">
